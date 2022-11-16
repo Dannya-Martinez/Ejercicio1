@@ -1,0 +1,40 @@
+import math
+
+print("Encuentre por medio del algoritmo de Runge-Kutta de orden 4 la solución numérica a la siguiente ecuación diferencial:  y'=1+y^2 ")
+print("\n")
+print("Respetando las siguientes condiciones:")
+print("Punto de interés x= 1.4")
+print("y(0)=0")
+print("Paso de iteración h=0.1")
+print("\n")
+
+def f(x, y):
+    f = 1 + y**2
+    return f
+
+def RK4(x, y, h):
+    k1 = h * f(x, y)
+    k2 = h * f(x + (h/2), y + (k1/2))
+    k3 = h * f(x + (h/2), y + (k2/2))
+    k4 = h * f(x + h, y + k3)
+    k = (1/6) * (k1 + 2*k2 + 2*k3 + k4)
+    return k
+
+def main():
+    xf = 1.4 
+    h = 0.1
+    x = 0 
+    y = 0 
+    while x <= xf:
+        print("x:\t", "%.2f" % x)
+        print("y("+"%.2f" % x +"):", "%.7f" % y)
+        print(10*"<3")
+        print("\n")
+        y += RK4(x,y,h)
+        x += h
+    print("x:\t", "%.2f" % x)
+    print("y("+"%.2f" % x +"):", "%.7f" % y)
+    print("\n")
+    print("El obtenido de la solución y(1.4) es ",round(y,7))
+
+main()
