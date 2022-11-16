@@ -1,0 +1,32 @@
+import math
+
+print("Utilizando el método de Simpson 3/8 compuesto, se evalua la función sin(1/x) con los siguientes límites: ")
+print ("\n")
+
+a = 1/(2*math.pi)
+b = 2
+print("Límite inferior: ", a)
+print("Límite superior: ", b)
+print ("\n")
+
+def f(x):
+    f = math.sin(1/x)
+    return f
+    
+def simpson38(a,b,n):
+    h = (b-a)/n
+    I = f(a) + f(b)
+    for k in range(1,n):
+        if k%3!=0:
+            I += 3*f(a + k*h)
+        else:
+            I += 2*f(a + k*h)
+    I *= (3*h/8)
+    return I
+
+def main():
+    n = 3000
+    print("Número de intervalos requeridos: ", n)
+    I = simpson38(a,b,n)
+    print("Valor de la integración: ", round(I,8))
+main()
